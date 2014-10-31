@@ -1,5 +1,19 @@
 MarkRingView = require './mark-ring-view'
 
+addMark = (position) ->
+
+clearMark = (position) ->
+
+moveToMark = (direction) ->
+
+moveToNextMark = ->
+
+moveToPreviousMark = ->
+
+removeAllMarks = ->
+
+recallMarks = ->
+
 module.exports =
   markRingView: null
 
