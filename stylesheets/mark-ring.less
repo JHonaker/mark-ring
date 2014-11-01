@@ -3,6 +3,18 @@
 // See https://github.com/atom/atom-dark-ui/blob/master/stylesheets/ui-variables.less
 // for a full listing of what's available.
 @import "ui-variables";
+@import "octicon-utf-codes";
 
 .mark-ring {
+}
+
+.editor, atom-text-editor::shadow {
+  .gutter .line-number.mark .icon-right {
+    visibility: visible;
+
+    &:before {
+      content: @plus;
+      color: #AFE8F6;
+    }
+  }
 }

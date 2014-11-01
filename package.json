@@ -1,16 +1,15 @@
 {
   "name": "mark-ring",
-  "main": "./lib/mark-ring",
+  "main": "./lib/main",
   "version": "0.0.0",
   "description": "A short description of your package",
-  "activationCommands": {
-    "atom-workspace": "mark-ring:toggle"
-  },
-  "repository": "https://github.com/atom/mark-ring",
+  "repository": "https://github.com/jhonaker/mark-ring",
   "license": "MIT",
   "engines": {
     "atom": ">0.50.0"
   },
   "dependencies": {
+    "underscore-plus": "1.x",
+    "emissary": "^1.2.0"
   }
 }

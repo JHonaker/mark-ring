@@ -8,4 +8,10 @@
 # For more detailed documentation see
 # https://atom.io/docs/latest/advanced/keymaps
 '.workspace':
-  'ctrl-alt-o': 'mark-ring:toggle'
+    'cmd-shift-m': 'mark-ring:toggle-mark'
+
+
+'.editor':
+    'cmd-shift-m': 'mark-ring:toggle-mark'
+    'cmd-shift-r': 'mark-ring:recall-marks'
+    'cmd-shift-c': 'mark-ring:clear-marks'

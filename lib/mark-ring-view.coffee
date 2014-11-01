@@ -1,31 +1,75 @@
+path = require 'path'
+
+{$$, SelectListView} = require 'atom'
+
 module.exports =
-class MarkRingView
-  constructor: (serializeState) ->
-    # Create root element
-    @element = document.createElement('div')
-    @element.classList.add('mark-ring',  'overlay', 'from-top')
+class MarkRingView extends SelectListView
+  initialize: ->
+    super
+    @addClass('mark-ring-view overlay from-top')
 
-    # Create message element
-    message = document.createElement('div')
-    message.textContent = "The MarkRing package is Alive! It's ALIVE!"
-    message.classList.add('message')
-    @element.appendChild(message)
+  getFilterKey: ->
+    'filterText'
 
-    # Register command that toggles this view
-    atom.commands.add 'atom-workspace', 'mark-ring:toggle': => @toggle()
-
-  # Returns an object that can be retrieved when package is activated
-  serialize: ->
-
-  # Tear down any state and detach
-  destroy: ->
-    @element.remove()
-
-  # Toggle the visibility of this view
   toggle: ->
-    console.log 'MarkRingView was toggled!'
-
-    if @element.parentElement?
-      @element.remove()
+    if @hasParent()
+      @cancel()
     else
-      atom.workspaceView.append(@element)
+      @populateMarks()
+      @attach()
+
+  getFilterText: (mark) ->
+    segments = []
+    markRow = mark.marker.getStartPosition().row
+    segments.push(markRow)
+    if bufferPath = mark.buffer.getPath()
+      segments.push(bufferPath)
+    if lineText = @getLineText(mark)
+      segments.push(lineText)
+    segments.join(' ')
+
+  getLineText: (mark) ->
+    mark.buffer.lineForRow(mark.marker.getStartPosition().row)?.trim()
+
+  populateMarks: ->
+    marks = []
+    attributes = class: 'mark'
+    for buffer in atom.project.getBuffers()
+      for marker in buffer.findMarkers(attributes)
+        mark = {marker, buffer}
+        mark.fitlerText = @getFilterText(mark)
+        marks.push(mark)
+    @setItems(marks)
+
+  viewForItem: (mark) ->
+    markRow = mark.marker.getStartPosition().row
+    if filePath = mark.buffer.getPath()
+      markLocation = "#{path.basename(filePath)}:#{markRow + 1}"
+    else
+      markLocation = "untitled:#{markRow + 1}"
+    lineText = @getLineText(mark)
+
+    $$ ->
+      if lineText
+        @li class: 'mark two-lines', =>
+          @div markLocation, class: 'primary-line'
+          @div lineText, class: 'secondary-line line-text'
+      else
+        @li class: 'mark', =>
+          @div markLocation, class: 'primary-line'
+
+  getEmptyMessage: (itemCount) ->
+    if itemCount is 0
+      'No marks found'
+    else
+      super
+
+  confirmed: ({buffer, marker}) ->
+    atom.workspace.open(buffer.getPath()).done (editor) ->
+      editor.setSelectedBufferRange?(marker.getRange(), autoscroll: true)
+    @cancel()
+
+  attach: ->
+    @storeFocusedElement()
+    atom.workspaceView.append(this)
+    @focusFilterEditor()
