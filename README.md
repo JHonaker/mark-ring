@@ -2,7 +2,7 @@
 
 Inspired by the [Must Have Packages That Don't Exist thread](https://discuss.atom.io/t/must-have-packages-that-dont-exist/12665) and the [MarkAndMove ST package](https://github.com/colinta/SublimeMarkAndMove), I decided to implement an easier way to create mulitple cursors with only the keyboard.
 
-![A screenshot of your mark-ring]()
+![A screenshot of your mark-ring](https://raw.githubusercontent.com/JHonaker/mark-ring/master/mark-ring.gif)
 
 # TODO:
 
