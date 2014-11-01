@@ -2,7 +2,11 @@
 
 Inspired by the [Must Have Packages That Don't Exist thread](https://discuss.atom.io/t/must-have-packages-that-dont-exist/12665) and the [MarkAndMove ST package](https://github.com/colinta/SublimeMarkAndMove), I decided to implement an easier way to create mulitple cursors with only the keyboard.
 
+![A screenshot of your mark-ring]()
+
 # TODO:
+
+If anyone has any suggestions or ideas, open an issue or submit a pull request!
 
 [X] Create mark at cursor
     [ ] Toggle Mark won't remove mark
@@ -10,9 +14,6 @@ Inspired by the [Must Have Packages That Don't Exist thread](https://discuss.ato
 [ ] Move to next/previous mark
 [X] View and move to marks in popover
 [X] Create cursors at marks in buffer
-
-
-![A screenshot of your mark-ring]()
 
 Acknowledgements:
 
