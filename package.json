@@ -1,7 +1,7 @@
 {
   "name": "mark-ring",
   "main": "./lib/main",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A short description of your package",
   "repository": "https://github.com/jhonaker/mark-ring",
   "license": "MIT",
