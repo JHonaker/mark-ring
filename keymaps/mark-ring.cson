@@ -1,17 +1,12 @@
-# Keybindings require three things to be fully defined: A selector that is
-# matched against the focused element, the keystroke and the command to
-# execute.
-#
-# Below is a basic keybinding which registers on all platforms by applying to
-# the root workspace element.
-
-# For more detailed documentation see
-# https://atom.io/docs/latest/advanced/keymaps
-'.workspace':
-    'cmd-shift-m': 'mark-ring:toggle-mark'
-
-
-'.editor':
+# Mac specific bindings
+'.platform-darwin .editor':
     'cmd-shift-m': 'mark-ring:toggle-mark'
     'cmd-shift-r': 'mark-ring:recall-marks'
     'cmd-shift-c': 'mark-ring:clear-marks'
+    'cmd-shift-v': 'mark-ring:view-all'
+# Linux and Windows specific bindings
+'.platform-linux .editor, .platform-win32 .editor':
+    'ctrl-shift-m': 'mark-ring:toggle-mark'
+    'ctrl-shift-r': 'mark-ring:recall-marks'
+    'ctrl-shift-c': 'mark-ring:clear-marks'
+    'ctrl-shift-v': 'mark-ring:view-all'
