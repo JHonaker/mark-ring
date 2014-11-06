@@ -34,11 +34,10 @@ class MarkRing
         mark
 
     clearMarks: =>
-        mark.destroy() for mark in @marks
+        mark.destroy() for mark in @findMarks()
 
     recallMarks: =>
-        @editor.addCursorAtBufferPosition(mark.getStartBufferPosition()) for mark in @marks
-        @clearMarks()
+        @editor.addCursorAtBufferPosition(mark.getStartBufferPosition()) for mark in @findMarks()
 
     addDecorationsForMarks: =>
         for mark in @marks when mark.isValid()
