@@ -45,11 +45,6 @@ By default only these keybindings are set up:
 
 The rest are still available through the command palette or you own custom keybindings.
 
-
-- `CMD-SHIFT-M` Marking cursors
-- `CMD-SHIFT-R` Recall marks
-- `CMD-SHIFT-C` Clear all marks
-
 If anyone has any suggestions or ideas, open an issue or submit a pull request!
 
 ## Acknowledgements:
