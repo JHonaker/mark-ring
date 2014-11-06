@@ -17,12 +17,16 @@ class MarkRing
     markCursor: =>
         cursors = @editor.getCursors()
         for cursor in cursors
-            position = cursor.getBufferPosition()
-            marks = @findMarks(containsBufferPosition: [position.row, position.column])
-            [mark] =  (m for m in marks when m.getStartBufferPosition().isEqual(position))
+            mark = @getMarkUnderCursor(cursor)
 
             if not mark?
-                @createMark(position)
+                @createMark(cursor.getBufferPosition())
+
+    getMarkUnderCursor: (cursor) =>
+        position = cursor.getBufferPosition()
+        marks = @findMarks(containsBufferPosition: [position.row, position.column])
+        [mark] =  (m for m in marks when m.getStartBufferPosition().isEqual(position))
+        mark
 
     createMark: (position) ->
         mark = @displayBuffer().markBufferRange([[position.row, position.column],
