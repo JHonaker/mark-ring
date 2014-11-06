@@ -1,7 +1,7 @@
 {
   "name": "mark-ring",
   "main": "./lib/main",
-  "version": "2.0.0",
+  "version": "1.0.0",
   "description": "Easily create multiple cursors without your mouse.",
   "repository": "https://github.com/jhonaker/mark-ring",
   "license": "MIT",
