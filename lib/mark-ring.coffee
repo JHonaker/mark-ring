@@ -7,7 +7,6 @@ class MarkRing
 
     constructor: (editorView) ->
         {@editor, @gutter} = editorView
-        console.log @editor
 
         @subscribeToCommand editorView, 'mark-ring:toggle-mark', @toggleMark
         @subscribeToCommand editorView, 'mark-ring:recall-marks', @recallMarks
@@ -16,36 +15,37 @@ class MarkRing
         @addDecorationsForMarks
 
     toggleMark: =>
-        console.log @editor
         cursors = @editor.getCursors()
         for cursor in cursors
             position = cursor.getBufferPosition()
-            mark = @findMarks(startBufferPosition: position)
+            marks = @findMarks(containsBufferPosition: [position.row, position.column])
+            [mark] =  (m for m in marks when m.getStartBufferPosition().isEqual(position))
 
-            if mark?
+            if not mark?
                 @createMark(position)
             else
                 mark.destroy()
 
-
-
     createMark: (position) ->
-        mark = @displayBuffer().markBufferPosition(position, @markAttributes(invalidate: 'never'))
+        mark = @displayBuffer().markBufferRange([[position.row, position.column],
+                                                 [position.row, position.column + 1]],
+                                                 @markAttributes(invalidate: 'never'))
         @subscribe mark, 'changed', ({isValid}) ->
             mark.destroy() unless isValid
-        @editor.decorateMarker(mark, {type: 'gutter', class: 'mark'})
+        @editor.decorateMarker(mark, {type: 'highlight', class: 'mark'})
+        @marks.push mark
         mark
 
     clearMarks: =>
-        mark.destroy() for mark in @findMarks()
+        mark.destroy() for mark in @marks
 
     recallMarks: =>
-        @editor.addCursorAtBufferPosition(mark.getStartBufferPosition()) for mark in @findMarks()
+        @editor.addCursorAtBufferPosition(mark.getStartBufferPosition()) for mark in @marks
         @clearMarks()
 
     addDecorationsForMarks: =>
-        for mark in @findMarks() when mark.isValid()
-            @editor.decorateMarker(mark, {type: 'gutter', class: 'mark'})
+        for mark in @marks when mark.isValid()
+            @editor.decorateMarker(mark, {type: 'highlight', class: 'mark'})
 
         null
 
