@@ -33,7 +33,6 @@ class MarkRing
         @subscribe mark, 'changed', ({isValid}) ->
             mark.destroy() unless isValid
         @editor.decorateMarker(mark, {type: 'highlight', class: 'mark'})
-        @marks.push mark
         mark
 
     clearMarks: =>
