@@ -11,6 +11,7 @@ class MarkRing
         @subscribeToCommand editorView, 'mark-ring:mark-cursor', @markCursor
         @subscribeToCommand editorView, 'mark-ring:recall-marks', @recallMarks
         @subscribeToCommand editorView, 'mark-ring:clear-marks', @clearMarks
+        @subscribeToCommand editorView, 'mark-ring:mark-or-recall', @markOrRecall
 
         @addDecorationsForMarks
 
@@ -42,6 +43,15 @@ class MarkRing
 
     recallMarks: =>
         @editor.addCursorAtBufferPosition(mark.getStartBufferPosition()) for mark in @findMarks()
+
+    markOrRecall: =>
+        mark = @getMarkUnderCursor(@editor.getCursor())
+
+        if not mark?
+            @markCursor()
+        else
+            @recallMarks()
+            @clearMarks()
 
     addDecorationsForMarks: =>
         for mark in @marks when mark.isValid()
