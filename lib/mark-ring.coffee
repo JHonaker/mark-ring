@@ -8,13 +8,13 @@ class MarkRing
     constructor: (editorView) ->
         {@editor, @gutter} = editorView
 
-        @subscribeToCommand editorView, 'mark-ring:toggle-mark', @toggleMark
+        @subscribeToCommand editorView, 'mark-ring:mark-cursor', @markCursor
         @subscribeToCommand editorView, 'mark-ring:recall-marks', @recallMarks
         @subscribeToCommand editorView, 'mark-ring:clear-marks', @clearMarks
 
         @addDecorationsForMarks
 
-    toggleMark: =>
+    markCursor: =>
         cursors = @editor.getCursors()
         for cursor in cursors
             position = cursor.getBufferPosition()
@@ -23,8 +23,6 @@ class MarkRing
 
             if not mark?
                 @createMark(position)
-            else
-                mark.destroy()
 
     createMark: (position) ->
         mark = @displayBuffer().markBufferRange([[position.row, position.column],

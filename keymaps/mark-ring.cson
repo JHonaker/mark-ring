@@ -1,12 +1,12 @@
 # Mac specific bindings
 '.platform-darwin .editor':
-    'cmd-shift-m': 'mark-ring:toggle-mark'
+    'cmd-shift-m': 'mark-ring:mark-cursor'
     'cmd-shift-r': 'mark-ring:recall-marks'
     'cmd-shift-c': 'mark-ring:clear-marks'
     'cmd-shift-v': 'mark-ring:view-all'
 # Linux and Windows specific bindings
 '.platform-linux .editor, .platform-win32 .editor':
-    'ctrl-shift-m': 'mark-ring:toggle-mark'
+    'ctrl-shift-m': 'mark-ring:mark-cursor'
     'ctrl-shift-r': 'mark-ring:recall-marks'
     'ctrl-shift-c': 'mark-ring:clear-marks'
     'ctrl-shift-v': 'mark-ring:view-all'
