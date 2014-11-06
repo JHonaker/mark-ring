@@ -35,13 +35,13 @@ By default only these keybindings are set up:
 
 ##### Mac
 
-`CMD-SHIFT-M`: `mark-ring:mark-or-recall`
-`CMD-SHIFT-V`: `mark-ring:view-marks`
+* `CMD-SHIFT-M`: `mark-ring:mark-or-recall`
+* `CMD-SHIFT-V`: `mark-ring:view-marks`
 
 ##### Windows/Linux
 
-`CTRL-SHIFT-M`: `mark-ring:mark-or-recall`
-`CTRL-SHIFT-V`: `mark-ring:view-marks`
+* `CTRL-SHIFT-M`: `mark-ring:mark-or-recall`
+* `CTRL-SHIFT-V`: `mark-ring:view-marks`
 
 The rest are still available through the command palette or you own custom keybindings.
 
